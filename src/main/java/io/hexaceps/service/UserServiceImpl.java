@@ -57,11 +57,13 @@ public class UserServiceImpl implements UserService {
         existUser.setAddress(userDTO.getAddress());
         existUser.setPhoneNumber(String.valueOf(userDTO.getPhoneNumber()));
         existUser.setNewsletter(userDTO.isNewsletter());
+        existUser.setSize(userDTO.getSize());
+        existUser.setFavourite(userDTO.getFavorite());
         // existUser.setSocialLogin(userDTO.isSocialLogin()); 사용안함 (변동 없는 정책)
 
-        // 역할 업데이트
-        existUser.getUserRoleList().clear();
-        userDTO.getRoleNames().forEach(role -> existUser.addRole(UserRole.valueOf(role)));
+        // 역할 업데이트 (사용하지 않고, DB로 관리)
+        // existUser.getUserRoleList().clear();
+        // userDTO.getRoleNames().forEach(role -> existUser.addRole(UserRole.valueOf(role)));
 
         HexaUser updatedUser = userRepository.save(existUser);
         return mapToDTO(updatedUser);
@@ -86,11 +88,13 @@ public class UserServiceImpl implements UserService {
         userDTO.setPhoneNumber(user.getPhoneNumber());
         userDTO.setNewsletter(user.isNewsletter());
         userDTO.setSocialLogin(user.isSocialLogin());
+        userDTO.setFavorite(user.getFavourite());
+        userDTO.setSize(user.getSize());
         userDTO.setRoleNames(user.getUserRoleList().stream().map(UserRole::name).collect(Collectors.toList()));
         return userDTO;
     }
 
-    // DTO 정보를 Entity builder 패턴 적용 후 리턴 (저장, 업데이트를 위해서)
+    // DTO 정보를 Entity builder 패턴 적용 후 리턴 (회원가입을 위해서)
     private HexaUser mapToEntity(UserDTO userDTO) {
         HexaUser user = HexaUser.builder()
                 .email(userDTO.getEmail())
@@ -100,8 +104,11 @@ public class UserServiceImpl implements UserService {
                 .phoneNumber(userDTO.getPhoneNumber())
                 .newsletter(userDTO.isNewsletter())
                 .socialLogin(userDTO.isSocialLogin())
+                .size(userDTO.getSize())
+                .favourite(userDTO.getFavorite())
+                .userRoleList(userDTO.getRoleNames().stream().map(UserRole::valueOf).collect(Collectors.toList()))
                 .build();
-        userDTO.getRoleNames().forEach(role -> user.addRole(UserRole.valueOf(role)));
+        userDTO.getRoleNames().forEach(role -> user.addRole(UserRole.USER));
         return user;
     }
 }

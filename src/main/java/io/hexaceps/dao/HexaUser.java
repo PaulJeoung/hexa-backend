@@ -36,10 +36,14 @@ public class HexaUser {
     @Column(length = 100)
     private String address;
 
+    private String size;
+
     private LocalDate registeredAt;
 
     // @ColumnDefault("TRUE")
     private boolean newsletter;
+
+    private String favourite;
 
     @Column(length = 5)
     // @ColumnDefault("11111")
@@ -91,4 +95,13 @@ public class HexaUser {
     public void setSocialLogin(boolean socialLogin) {
         this.socialLogin = socialLogin;
     }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public void setFavourite(String favourite) {
+        this.favourite = favourite;
+    }
+
 }

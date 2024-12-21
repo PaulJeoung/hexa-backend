@@ -14,13 +14,18 @@ spring:
         format_sql: true
   servlet:
     multipart:
-      max-request-size : 30MB #??? ???? ???
-      max-file-size : 10MB # ?? ??? ??
+      max-request-size : 30MB # transfer data per one-time
+      max-file-size : 10MB # size of one file
+  security:
+    user:
+      name: user
+      password: 1111
+
 
 org:
   zerock:
     upload:
-      path: upload # ????? ?? ??? upload??? ???? ??? ??
+      path: upload # file saved in project folder created name by upload
 
 logging.level:
   org.hibernate.SQL: debug

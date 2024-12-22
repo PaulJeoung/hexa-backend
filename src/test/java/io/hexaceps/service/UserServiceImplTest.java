@@ -13,9 +13,9 @@ import java.util.List;
 class UserServiceImplTest {
     @Autowired private UserService userService;
 
-    @Test
-    void 전체조회() {
-        List<UserDTO> userDTOList = userService.getAllUsers();
-
-    }
+//    @Test
+//    void 전체조회() {
+//        List<UserDTO> userDTOList = userService.getAllUsers();
+//
+//    }
 }

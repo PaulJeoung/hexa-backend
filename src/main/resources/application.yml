@@ -2,7 +2,7 @@ spring:
   application:
     name: hexaceps
   datasource:
-    url: jdbc:h2:tcp://localhost/~/devtest # testdb
+    url: jdbc:h2:tcp://localhost/~/testdb # testdb devtest
     username: sa
     password:
     driver-class-name: org.h2.Driver
@@ -16,10 +16,10 @@ spring:
     multipart:
       max-request-size : 30MB # transfer data per one-time
       max-file-size : 10MB # size of one file
-  security:
-    user:
-      name: user
-      password: 1111
+#  security:
+#    user:
+#      name: user
+#      password: 1111
 
 
 org:

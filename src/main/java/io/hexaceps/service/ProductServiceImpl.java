@@ -128,7 +128,7 @@ public class ProductServiceImpl implements ProductService {
         List<String> siteNames = productDTO.getProductSiteNames();
         if (siteNames != null && !siteNames.isEmpty()) {
             siteNames.stream().forEach(siteName -> {
-                product.addSiteLink(siteName);
+                product.addSiteLink(siteName, siteName.length());;
             });
         }
 
@@ -156,22 +156,35 @@ public class ProductServiceImpl implements ProductService {
                 .registeredAt(productDTO.getRegisteredAt())
                 .updatedAt(productDTO.getUpdatedAt())
                 .build();
+
         List<String> uploadFileNames = productDTO.getUploadFileNames();
-        List<String> productSiteNames = productDTO.getProductSiteNames();
 
         if(uploadFileNames != null && uploadFileNames.isEmpty()) {
-            return product;
+            // return product;
+            uploadFileNames.forEach(product::addImageString);
         }
-        uploadFileNames.stream().forEach(uploadFileName -> {
-            product.addImageString(uploadFileName);
-        });
+//        uploadFileNames.stream().forEach(uploadFileName -> {
+//            product.addImageString(uploadFileName);
+//        });
+
+        List<String> productSiteNames = productDTO.getProductSiteNames();
 
         if(productDTO.getProductSiteNames() != null && productDTO.getProductSiteNames().isEmpty()) {
-            return product;
+            productSiteNames.forEach(siteName ->
+                    product.addSiteLink(siteName, siteName.length())
+            );
+            //return product;
         }
-        productSiteNames.stream().forEach(productSiteName -> {
-            product.addSiteLink(productSiteName);
-        });
+//        for (int i = 0; i < productDTO.getProductSiteNames().size(); i++) {
+//            ProductSite productSite = ProductSite.builder()
+//                    .siteLink(productSiteNames.get(i))
+//                    .siteOrd(i)
+//                    .build();
+//            product.addSiteLink(productSite);
+//        }
+//        productSiteNames.stream().forEach(productSiteName -> {
+//            product.addSiteLink(productSiteName, productSiteName.length());
+//        });
 
         return product;
 

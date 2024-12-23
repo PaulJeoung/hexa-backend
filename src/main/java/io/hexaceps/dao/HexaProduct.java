@@ -73,9 +73,10 @@ public class HexaProduct {
         productSite.setSiteOrd(this.siteList.size());
         this.siteList.add(productSite);
     }
-    public void addSiteLink(String siteLink) {
+    public void addSiteLink(String siteLink, int orderNum) {
         ProductSite productSite = ProductSite.builder()
                 .siteLink(siteLink)
+                .siteOrd(orderNum)
                 .build();
         addProductSite(productSite);
     }

@@ -32,9 +32,9 @@ class ProductRepositoryTest {
                     .build();
             product.addImageString(i*1000 + "_" +UUID.randomUUID().toString() + "_" + i + ".png");
             product.addImageString(i*1000 + "_" +UUID.randomUUID().toString() + "_" + i+50 + ".png");
-            product.addSiteLink("http://localhost:8080/api/products/"+i);
-            product.addSiteLink("https://kream.co.kr/products/37466");
-            product.addSiteLink("https://stockx.com/air-jordan-6-retro-low-golf-white-infrared");
+            product.addSiteLink("http://localhost:8080/api/products/"+i, 0);
+            product.addSiteLink("https://kream.co.kr/products/37466", 1);
+            product.addSiteLink("https://stockx.com/air-jordan-6-retro-low-golf-white-infrared", 2);
             productRepository.save(product);
         }
     }

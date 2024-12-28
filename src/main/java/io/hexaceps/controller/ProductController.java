@@ -7,7 +7,6 @@ import io.hexaceps.service.ProductService;
 import io.hexaceps.util.CustomFileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/api/products")
+@RequestMapping("/api/product")
 public class ProductController {
 
     private final ProductService productService;
@@ -28,7 +26,7 @@ public class ProductController {
 
     // 상품 정보 신규 저장
     @PostMapping("/")
-    public Map<String, Long> addNewProduct(ProductDTO productDTO) {
+    public Map<String, Long> addNewProduct(@RequestBody ProductDTO productDTO) {
         log.info("Add New Product Controller : {}", productDTO);
         // 이미지 파일 먼저 upload 폴더에 저장
         List<MultipartFile> files = productDTO.getFiles();
@@ -64,61 +62,34 @@ public class ProductController {
         return productService.getProductById(productId);
     }
 
+    /*
     //상품수정
     @PutMapping("/{productId}")
     public Map<String, String> updateProduct(@PathVariable("productId") Long productId, ProductDTO productDTO) {
         productDTO.setProductId(productId);
-
         ProductDTO oldProductDTO = productService.getProductById(productId);
         //기존파일이름
         List<String> oldFileNames = oldProductDTO.getUploadFileNames();
-
         //새로 업로드 해야하는 파일
         List<MultipartFile> files = productDTO.getFiles();
-
         //새로 업로드해야하는 파일의 이름
         List<String> currentUploadFileNames = customFileUtil.saveFiles(files);
-
         //유지되는 파일
         List<String> uploadedFileNames = productDTO.getUploadFileNames();
-
         //유지되는파일 + 새로 업로드된 파일 => 파일목록을 만든다
         if(currentUploadFileNames != null && !currentUploadFileNames.isEmpty()) {
             uploadedFileNames.addAll(currentUploadFileNames);
         }
-
         //수정한다.
         //A,B,C 파일이 있었음, C는 삭제했음, D는 새로 들어왔음 => A,B,D의 처리가 끝남
         productService.updateProduct(productDTO);
-
         //c를 삭제하여야 한다.
         if(oldFileNames != null && !oldFileNames.isEmpty()){
             List<String> removeFiles = oldFileNames.stream().filter(fileName -> uploadedFileNames.indexOf(fileName) == -1).collect(Collectors.toList());
-
             //실제로 파일 삭제
             customFileUtil.deleteFiles(removeFiles);
         }
         return Map.of("RESULT","SUCCESS");
     }
-
-    //상품삭제
-    @DeleteMapping("{productId}")
-    public Map<String,String> remove(@PathVariable("productId") Long productId){
-        //삭제할 파일 알아내기
-        List<String> oldFileNames = productService.getProductById(productId).getUploadFileNames();
-        productService.deleteProduct(productId);
-        customFileUtil.deleteFiles(oldFileNames);
-
-        return Map.of("RESULT","DELETE STCCESS");
-    }
-
+     */
 }
-/*
-   // 상품 등록
-    @PostMapping("/")
-    public ResponseEntity<ProductDTO> createProduct(@RequestPart("product") ProductDTO product, @RequestPart(value = "images", required = false)List<MultipartFile> images) {
-        log.info("Creating product {}", product);
-        ProductDTO createProduct = productService.createProduct(product, images );
-        return new ResponseEntity<>(createProduct, HttpStatus.CREATED);
-    }
- */

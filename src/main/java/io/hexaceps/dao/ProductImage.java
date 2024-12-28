@@ -11,14 +11,10 @@ import lombok.*;
 @NoArgsConstructor
 
 public class ProductImage {
-
     private String fileName;
-
     private int ord; // 0 이 대표 이미지, 원하는 번호만 볼수 있게 ordering
 
-    //이미지순서
     public void setOrd(int ord) {
         this.ord = ord;
     }
-
 }

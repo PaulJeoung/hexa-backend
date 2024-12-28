@@ -3,14 +3,16 @@ package io.hexaceps.dao;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity @Getter
-@ToString (exclude = "imageList")
+@Entity
+@Getter
+@ToString (exclude = {"imageList", "siteList"})
 @Builder
-@AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class HexaProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +31,9 @@ public class HexaProduct {
     @Column(columnDefinition = "TEXT")
     private String productDescription;
 
-    private LocalDateTime registeredAt;
+    private LocalDate registeredAt;
 
-    private LocalDateTime updatedAt;
+    private LocalDate updatedAt;
 
     private String size;
 
@@ -108,11 +110,11 @@ public class HexaProduct {
         this.productDescription = productDescription;
     }
 
-    public void setRegisteredAt(LocalDateTime registeredAt) {
+    public void setRegisteredAt(LocalDate registeredAt) {
         this.registeredAt = registeredAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
     }
 

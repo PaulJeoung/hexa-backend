@@ -37,6 +37,8 @@ dependencies {
 	// testImplementation 'org.springframework.security:spring-security-test'
 	implementation 'net.coobird:thumbnailator:0.4.19'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
 	//querydsl, 5.0.0은 버전임
 	implementation "com.querydsl:querydsl-jpa:5.0.0:jakarta"
 	annotationProcessor(

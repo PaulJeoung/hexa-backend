@@ -25,14 +25,11 @@ public class PageResponseDTO<E> {
     //총데이터, 이전페이지, 다음페이지, 총페이지, 현재페이지
     private int totalCount, prevPage, nextPage, totalPage, current;
 
-    // <= 1,2,3,.....10 =>
-    //<= 11, 12, 13.... 20 =>
-
-    //현재페이지3 시작값1, 끝값10
+    // 현재페이지3 시작값1, 끝값10
     // (3/10 = 0.3 => 올림 => 1 * 10 = 10 끝값, 시작값=> 끝값-9 = 1
-    //현재페이지 15 시작값 11 긑값 20
+    // 현재페이지 15 시작값 11 긑값 20
     // 15/10=1.5=> 2 * 10 = 20 끝값, 시작값 20-9=11
-    //현재페이지 19
+    // 현재페이지 19
 
     @Builder(builderMethodName = "withAll")
     public PageResponseDTO(List<E> dtoList, PageRequestDTO pageRequestDTO, long totalCount){
@@ -46,8 +43,7 @@ public class PageResponseDTO<E> {
         //시작값
         int start = end - 9;
 
-        //마지막페이지
-        //285개 => 285 / 10 => 28.5 => 올림 29
+        //마지막페이지 // 285개 => 285 / 10 => 28.5 => 올림 29
         int last = (int)(Math.ceil(totalCount / (double) pageRequestDTO.getSize()));
 
         //마지막페이지이면 last
@@ -68,6 +64,5 @@ public class PageResponseDTO<E> {
 
         this.totalPage = this.pageNumList.size();
         this.current = pageRequestDTO.getPage();
-
     }
 }

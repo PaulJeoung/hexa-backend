@@ -2,7 +2,7 @@ spring:
   application:
     name: hexaceps
   datasource:
-    url: jdbc:h2:tcp://localhost/~/testdb # testdb devtest
+    url: jdbc:h2:tcp://localhost/~/devtest # testdb devtest
     username: sa
     password:
     driver-class-name: org.h2.Driver

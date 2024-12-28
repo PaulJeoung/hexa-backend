@@ -27,12 +27,18 @@ public interface ProductRepository extends JpaRepository<HexaProduct, Long> {
 
     // 상품 삭제
 
+    // /api/product/list 조회시에 사용할 상품 조회 쿼리
+    @Query("select p, pi, sl from HexaProduct p" +
+            " left join p.imageList pi on pi.ord = 0 " +
+            " left join p.siteList sl on sl.siteOrd = 0")
+    Page<Object[]> findBySelectImageAndSiteList (Pageable pageable);
+
     // 상품 조회시 이미지도 함께 출력
-    @Query("select p, pi from HexaProduct p left join p.imageList pi where pi.ord = 0")
-    Page<Object[]> findBySelectImageList(Pageable pageable);
+    // @Query("select p, pi from HexaProduct p left join p.imageList pi where pi.ord = 0")
+    // Page<Object[]> findBySelectImageList(Pageable pageable);
 
     // 상품 조회시 Site Link도 함께 출력
-    @Query("select p, sl from HexaProduct p left join p.siteList sl where sl.siteOrd = 0")
-    Page<Object[]> findBySelectSiteList(Pageable pageable);
+    // @Query("select p, sl from HexaProduct p left join p.siteList sl where sl.siteOrd = 0")
+    // Page<Object[]> findBySelectSiteList(Pageable pageable);
 
 }

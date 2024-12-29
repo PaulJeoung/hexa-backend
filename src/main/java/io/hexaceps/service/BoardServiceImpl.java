@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Builder
@@ -34,7 +36,7 @@ public class BoardServiceImpl implements BoardService {
         return boards.map(this::mapToDTO);
     }
 
-    // 조회 하는 경우에 view count 증가 하는 서비스 구현
+    // id 로 게시글 조회 및 조회 하는 경우에 view count 증가 하는 서비스 구현
     @Override
     @Transactional
     public BoardDTO getBoardCountById(Long id) {
@@ -84,6 +86,7 @@ public class BoardServiceImpl implements BoardService {
     // Entity 정보를  DTO로 변환 해서 리턴 (조회를 위해서)
     private BoardDTO mapToDTO(HexaBoard board) {
         BoardDTO boardDTO = new BoardDTO();
+        boardDTO.setId(board.getId());
         boardDTO.setCategory(board.getCategory());
         boardDTO.setTitle(board.getTitle());
         boardDTO.setContent(board.getContent());

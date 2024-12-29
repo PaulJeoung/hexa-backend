@@ -12,7 +12,7 @@ public interface BoardService {
     // 검색 결과 조회
     Page<BoardDTO> getSearchBoards(String category, String keyword, Pageable pageable);
 
-    // 게시글 조회시 조회수 증가
+    // 게시글 id 조회 및 조회시 조회수 증가
     BoardDTO getBoardCountById(Long id);
 
     // 게시글 생성 (관리자 only)

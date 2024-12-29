@@ -34,7 +34,7 @@ public class BoardController {
         return new ResponseEntity<>(boards, HttpStatus.OK);
     }
 
-    // 게시글 조회 (조회수 증가)
+    // 게시글 id로 조회 (조회수 기능 증가)
     @GetMapping("/{id}")
     public ResponseEntity<BoardDTO> getBoardById(@PathVariable Long id) {
         log.info("getBoardById");
